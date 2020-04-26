@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title><%= context.title %></title>
+    <link rel="icon" href="./assets/ico/COM.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/ico/COM.ico" type="image/x-icon">
+    <script src="./config/config.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="./assets/echarts.min.4.2.1.js"></script>
+    <script src="./assets/react.production.min.js"></script>
+    <script src="./assets/react-dom.production.min.js"></script>
+    <script>
+        // 防止下拉
+        // function touchmove () {
+        //     document.body.addEventListener('touchmove', function (e) {
+        //         e.preventDefault()
+        //     }, {passive: false})
+        // }
+        // touchmove()
+
+        // 处理安卓手机输入法遮挡输入框问题（摘自WEUI）
+        if ((/Android/gi).test(navigator.userAgent)) {
+            window.addEventListener('resize', function () {
+                if (document.activeElement.tagName == 'INPUT' ||
+                    document.activeElement.tagName == 'TEXTAREA') {
+                    window.setTimeout(function () {
+                        document.activeElement.scrollIntoViewIfNeeded();
+                    }, 0);
+                }
+            });
+        }
+
+        // 解决微信键盘收起页面不回弹的问题
+        function isWeiXinAndIos() {
+            const ua = `${window.navigator.userAgent.toLowerCase()}`;
+            const isWeixin = /MicroMessenger/i.test(ua);
+            const isIos = /\(i[^;]+;( U;)? CPU.+Mac OS X/i.test(ua);
+            return isWeixin && isIos;
+        }
+
+        function weChatInputBug() {
+            let myFunction;
+            const isWXAndIos = this.isWeiXinAndIos();
+            if (isWXAndIos) {
+                document.body.addEventListener('focusin', () => {
+                    clearTimeout(myFunction);
+                });
+                document.body.addEventListener('focusout', () => {
+                    clearTimeout(myFunction);
+                    myFunction = setTimeout(() => {
+                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+                    }, 200);
+                });
+            }
+        }
+        weChatInputBug();
+    </script>
+</body>
+</html>

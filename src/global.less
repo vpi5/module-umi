@@ -1,0 +1,39 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout:none;  /*系统默认菜单被禁用*/
+  -webkit-user-select:none; /*webkit浏览器*/
+  -khtml-user-select:none; /*早期浏览器*/
+  -moz-user-select:none;/*火狐*/
+  -ms-user-select:none; /*IE10*/
+  user-select:none;
+  background: #F7F4F8;
+}
+html, body{
+  //font-family:"PingFang SC", "SimHei","Helvetica Neue",Helvetica,Tahoma,"Source Han Sans CN",STHeiTi,"Heiti SC","Microsoft Yahei",Arial !important;
+  font-family:"PingFangSC-Regular",Arial !important;
+  width: 100%;
+  height: 100%;
+}
+
+input, textarea{
+  outline: none;
+  -webkit-appearance: none; /*去除系统默认的样式*/
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* 点击高亮的颜色*/
+}
+
+
+// 涨跌颜色
+@Upper:#DC2821;
+@Down:#1EA30A;
+.Upper{
+  color:@Upper;
+}
+.Down{
+  color:@Down;
+}
