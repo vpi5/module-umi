@@ -1,19 +1,12 @@
 import axios from 'axios';
 import qs from 'qs';
-import requestUrl from './config';
 import DealAlert from "../popUpAlert/dealAlert";
-import {StorageGetFun} from "../storageFun";
 
-let baseURL = requestUrl;
+let baseURL = webConfig;
 
 // 封装axios
 async function apiAxios (module, method, url, params) {
-    let comboUserInfo = StorageGetFun('comboUserInfo');
     let headers = {};
-    if(comboUserInfo !== false && module === 'base'){
-        headers.token = comboUserInfo.token;
-        headers.gameId = comboUserInfo.tradeAccount.gameId;
-    }
     params.timestamp = new Date().getTime();
     let httpDefault = {
         method: method,
@@ -35,16 +28,6 @@ function gat(module, method, url, params) {
     return new Promise(callback =>{
 
         apiAxios(module, method, url, params).then(data =>{
-
-            if(module === 'base' && data.data.op.code === 'N'){
-                DealAlert.open({
-                    alertStatus : true,
-                    alertTip : {
-                        type : 'N',
-                        content : data.data.op.info
-                    },
-                });
-            }
 
             callback(data.data);
 

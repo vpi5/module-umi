@@ -1,11 +1,9 @@
 import axios from 'axios';
 import qs from 'qs';
-import requestUrl from './config';
 import DealAlert from "../popUpAlert/dealAlert";
-import {StorageGetFun} from "../storageFun";
 
 
-let baseURL = requestUrl;
+let baseURL = webConfig;
 /*
 // 添加请求拦截器，在发送请求之前的拦截。
 axios.interceptors.request.use(function (config) {
@@ -31,12 +29,7 @@ axios.interceptors.response.use(function (response) {
 
 // 封装axios
 export const apiAxios = function (module = 'base', method, url, params) {
-    let comboUserInfo = StorageGetFun('comboUserInfo');
     let headers = {};
-    if(comboUserInfo !== false){
-        headers.token = comboUserInfo.token;
-        headers.gameId = comboUserInfo.tradeAccount.gameId;
-    }
     // 添加动态参数
     params.timestamp = new Date().getTime();
 
