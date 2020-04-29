@@ -6,9 +6,10 @@
 
 # 启动本地开发环境服务
 
-    npm start || yarn start     ==> 启动项目
+    npm start [启动环境] || yarn start [启动环境]    ==> 启动项目
+    npm start test || yarn start test ==> 例子
     
-    ps:默认端口为3015，可在.env文件中进行自行修改
+    ps:默认端口为8000，可在.env文件中进行自行修改
     
 # 打包测试代码
 
